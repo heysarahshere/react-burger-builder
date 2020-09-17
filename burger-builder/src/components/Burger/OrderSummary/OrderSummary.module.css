@@ -1,0 +1,10 @@
+.OrderSummary {
+    text-align: center;
+    margin: 4px;
+}
+
+.OrderList {
+    margin: auto;
+    width: 30%;
+    text-align: left;
+}

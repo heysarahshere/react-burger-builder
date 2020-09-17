@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '../../UI/Button/Button';
+import classes from './OrderSummary.module.css';
 
 const orderSummary = (props) => {
     const ingredientSummary = Object.keys(props.ingredients)
@@ -8,14 +10,17 @@ const orderSummary = (props) => {
             </li>
     });
     return (
-        <React.Fragment>
+        <div className={classes.OrderSummary}>
             <h3>Your Order</h3>
             <p>A delicious burger with the following ingredients:</p>
-            <ul>
+            <div className={classes.OrderList}>
                 {ingredientSummary}
-            </ul>
+            </div>
+            <p><strong>Total Price: ${props.price.toFixed(2)}</strong></p>
             <p>Continue to Checkout?</p>
-        </React.Fragment>
+            <Button clicked={props.purchaseCanceled} btnType='Danger'>Cancel</Button>
+            <Button clicked={props.purchaseContinued} btnType='Success'>Continue</Button>
+        </div>
     );
 };
 
