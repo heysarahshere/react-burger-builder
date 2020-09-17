@@ -5,6 +5,14 @@
 
 .OrderList {
     margin: auto;
-    width: 30%;
+    width: 80%;
     text-align: left;
+}
+
+@media (min-width: 500px) {
+    .OrderList {
+        margin: auto;
+        width: 30%;
+        text-align: left;
+    }
 }
