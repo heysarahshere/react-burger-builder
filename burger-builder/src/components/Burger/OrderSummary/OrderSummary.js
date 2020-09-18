@@ -3,6 +3,9 @@ import Button from '../../UI/Button/Button';
 import classes from './OrderSummary.module.css';
 
 class OrderSummary extends Component {
+    componentDidUpdate(){
+        
+    }
     render() {
         const ingredientSummary = Object.keys(this.props.ingredients)
         .map(igKey => {
