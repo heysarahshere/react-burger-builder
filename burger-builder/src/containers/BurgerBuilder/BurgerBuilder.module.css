@@ -1,0 +1,9 @@
+.Spinner {
+    margin-top: 20%;
+}
+
+@media (max-width: 500px){
+    .Spinner {
+        padding-top: 25px;
+    }
+}
