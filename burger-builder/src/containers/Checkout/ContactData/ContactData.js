@@ -80,12 +80,22 @@ orderForm: {
     }
 
     render () {
+        const formArray = [];
+        for (let key in this.state.orderForm){
+            formArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            });
+        }
         let form = (
             <form>
-                <Input elementType="..." elementConfig="..." value="..."/>
-                <Input inputtype="input" type="email" name="email" placeholder="Your Email"/>
-                <Input inputtype="input" type="text" name="street" placeholder="Street"/>
-                <Input inputtype="input" type="text" name="zidCode" placeholder="Zip"/>
+                {formArray.map(formElement => (
+                    <Input key={formElement.id}
+                    elementType={formElement.config.type} 
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    />
+                ))}
                 <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
             </form>
             );
