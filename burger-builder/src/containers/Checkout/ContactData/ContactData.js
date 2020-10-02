@@ -3,16 +3,61 @@ import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ContactData.module.css';
 import axios from '../../../axios-orders';
+import { connect } from 'react-redux';
+import Input from '../../../components/UI/Input/Input';
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            zip: '',
-            country: ''
+orderForm: {
+        name: {
+            inputType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Your Name'
+            },
+            value: ''
         },
+        email: {
+            inputType: 'input',
+            elementConfig: {
+                type: 'email',
+                placeholder: 'Your Email'
+            },
+            value: ''
+        },
+        street: {
+            inputType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Street'
+            },
+            value: ''
+        },
+        zip: {
+            inputType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Zipcode'
+            },
+            value: ''
+        },
+        country: {
+            inputType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Country'
+            },
+            value: ''
+        },
+        deliveryMethod: {
+            inputType: 'select',
+            elementConfig: {
+                options: [{value: 'fastest', displayValue: 'Fastest'},
+                {value: 'cheapest', displayValue: 'Cheapest'}]
+            },
+            value: ''
+        },
+    },
         loading: false
     }
 
@@ -20,17 +65,8 @@ class ContactData extends Component {
         e.preventDefault();
         this.setState({loading: true});
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
-            customer: {
-                name: 'tom',
-                email: "elnjlv@dsfv.sdcv",
-                address: {
-                    street: 'Maine st',
-                    zip: '99343',
-                    country: 'USA'
-                },
-            },
             deliveryMethod: 'fastest'
         }
         axios.post('/orders.json', order)
@@ -46,10 +82,10 @@ class ContactData extends Component {
     render () {
         let form = (
             <form>
-                <input  className={classes.Input} type="text" name="name" placeholder="Your Name"/>
-                <input  className={classes.Input} type="email" name="email" placeholder="Your Email"/>
-                <input  className={classes.Input} type="text" name="street" placeholder="Street"/>
-                <input  className={classes.Input} type="text" name="zidCode" placeholder="Zip"/>
+                <Input elementType="..." elementConfig="..." value="..."/>
+                <Input inputtype="input" type="email" name="email" placeholder="Your Email"/>
+                <Input inputtype="input" type="text" name="street" placeholder="Street"/>
+                <Input inputtype="input" type="text" name="zidCode" placeholder="Zip"/>
                 <Button btnType="Success" clicked={this.orderHandler}>Order</Button>
             </form>
             );
@@ -57,7 +93,7 @@ class ContactData extends Component {
             form = <Spinner />
         }
         return(
-        <div className={classes.ContactData}>
+        <div className={classes.ContactData} >
             <h4>Enter Information</h4>
             {form}
         </div>
@@ -65,4 +101,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(ContactData);
