@@ -8,7 +8,6 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import classes from './BurgerBuilder.module.css';
 import { connect }  from 'react-redux';
-// import * as burgerBuilderActions from '../../store/actions/index';
 import * as actions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
@@ -112,6 +111,5 @@ const mapDispatchToProps = dispatch => {
         onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
-
 
 export default connect( mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
