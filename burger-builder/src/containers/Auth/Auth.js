@@ -48,6 +48,10 @@ class Auth extends Component {
         if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath();
         }
+        if (this.props.authRedirectPath === '/checkout'){
+            this.setState({justBuilt: true});
+        }
+        
     }
 
     checkValidity(value, rules) {
@@ -144,12 +148,12 @@ class Auth extends Component {
             console.log(this.props.authRedirectPath)
             authRedirect = <Redirect to={this.props.authRedirectPath}/>
         }
-
+        
         return (
             <div className={classes.Auth}>
+                <form onSubmit={this.submitHandler}>
                 {authRedirect}
                 {errorMessage}
-                <form onSubmit={this.submitHandler}>
                     {form}
                     <Button btnType="Success">{this.state.isSignup ? 'Sign Up' : 'Sign In'}</Button>
                 </form>
@@ -157,6 +161,7 @@ class Auth extends Component {
                 clicked={this.switchAuthModeHandler}
                 btnType="Danger">{this.state.isSignup ? 'Already a member? Sign In' : 'New here? Sign Up'}</Button>
             </div>
+
         );
     }
 }

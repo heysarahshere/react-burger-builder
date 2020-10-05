@@ -11,6 +11,7 @@ import { connect }  from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 class BurgerBuilder extends Component {
+
     state = {
         purchasing: false,
         loading: false,
@@ -57,6 +58,7 @@ class BurgerBuilder extends Component {
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0;
         }
+        
         let orderSummary = null;
         let burger = this.props.error ? <h3>There was a problem loading ingredients. Please try again later.</h3> : <div className={classes.Spinner}><Spinner /></div>;
         if(this.props.ings){
@@ -98,7 +100,8 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        buildingBurger: state.burgerBuilder.building
     };
 }
 
